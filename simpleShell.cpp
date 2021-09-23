@@ -27,6 +27,24 @@ void init_shell()
     clear();
 }
 
+// Function to take input
+int takeInput(char* str)
+{
+    char* buf;
+    // readline(const char *prompt) - get a line from a user with editing
+    buf = readline("\n>>> ");
+    // size_t strlen (const char * str);
+    if (strlen(buf) != 0) {
+        // save the line in a history list
+        add_history(buf);
+        // char * strcpy (char * destination, const char * source);
+        strcpy(str, buf);
+        return 0;
+    } else {
+        return 1;
+    }
+}
+
 // Function to print Current Directory.
 void printDir()
 {
@@ -48,7 +66,7 @@ void execArgs(char** parsed)
         printf("\nFailed forking child..");
         return;
     } else if (pid == 0) {
-        // current process is a child process
+        // pid == 0 -- current process is a child process
         if (execvp(parsed[0], parsed) < 0) {
             printf("\nCould not execute command..");
         }
