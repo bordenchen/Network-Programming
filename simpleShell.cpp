@@ -81,6 +81,8 @@ void execArgs(char** parsed)
 
 int main() 
 {
+    // how to pause printDir() when the process is still running
+    // how to safely handle input command
     init_shell();
 
     while (1) {
